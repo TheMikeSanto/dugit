@@ -1,8 +1,7 @@
 'use strict';
 
-function MainCtrl ($scope, ApiSvc, User) {
-	var user = new User(667485);
-	$scope.user = user.data;
+function MainCtrl ($rootScope, $scope, ApiSvc, User) {
+	$scope.user = new User(667485);
 }
 
-angular.module('scFriendsApp').controller('MainCtrl', ['$scope', 'ApiSvc', 'User', MainCtrl]);
+angular.module('scFriendsApp').controller('MainCtrl', ['$rootScope', '$scope', 'ApiSvc', 'User', MainCtrl]);
