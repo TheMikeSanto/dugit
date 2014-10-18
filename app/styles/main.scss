@@ -1,5 +1,32 @@
 @import 'typography';
+@import 'grid';
+@import 'utilities';
 
-#home {
-	width: 75%;
+.like {
+	border-bottom: 1px solid #CCCCCC;
+	vertical-align: middle;
+
+	.controls {
+		text-align: center;
+	}
+	
+	.people {
+		.artist {
+			font-size: 1em;
+			font-style: italic;
+			color: #8F8F8F;
+		}
+
+		.liked-by {
+			vertical-align: middle;
+			font-size: .6em;
+			font-weight: bold;
+			color: #E60000;
+
+		}
+	}
+
+	.track-info {
+		font-size: 1.2em;
+	}
 }

@@ -1,6 +1,6 @@
-<div id="home" class="container">
+<div id="home">
 	<div class="row">
-		<div class="col c9">
+		<div class="col c8 offset1">
 			<h2>
 				<i class="ico">☞</i> {{user.data.username}}
 			</h2>
@@ -13,10 +13,18 @@
 	</div>
 
 	<div class="row">
-		<div class="col c12">
+		<div class="col c8 offset1">
 			<p>
 				Showing recent likes from {{user.data.followings_count}} followed artists.
 			</p>
+		</div>
+	</div>
+
+	<div id="likes" class="row">
+		<div class="col c8 offset2">
+			<div ng-repeat="track in likes">
+				<div player-embed></div>
+			</div>
 		</div>
 	</div>
 </div>

@@ -49,6 +49,22 @@ function ApiSvc ($q) {
 		resolve: function (path) {
 			var url = "https://soundcloud.com/" + path;
 			return this.get('resolve', {url: url});
+		},
+		stream: function (trackId) {
+			var deferred = $q.defer();
+
+			SC.stream('/tracks/' + trackId, function (res) {
+				if (res.errors) {
+					deferred.reject(res.errors);
+				} else {
+					deferred.resolve(res);
+				}
+			});
+
+			return deferred.promise;
+		},
+		wrapper: function() {
+			return SC;
 		}
 	}
 }
