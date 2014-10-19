@@ -2,27 +2,31 @@
 
 function MainCtrl ($rootScope, $scope, $timeout, ApiSvc, User, StoreSvc) {
 	$scope.likes = [];
-	if (StoreSvc.get('username')) {
-		var username = StoreSvc.get('username');
-		user = new User(username);
-		$scope.user = user;
-		window.user = user;
-	} else {
-		$scope.user = false;
-	}
-	$scope.login = function (userId) {
-		var user = new User(userId);
-		$scope.user = user;
-		window.user = user;
 
-		user.ready().then(function() {
-			user.fetchFollowingLikes();
+	var afterUserReady = function() {
+		$scope.user.ready().then(function() {
+			$scope.user.fetchFollowingLikes();
 			$scope.$watch('user.followings.likes.length', function (newVal) {
 				$timeout(function() {
-					$scope.likes = user.followings.likes;
+					$scope.likes = $scope.user.followings.likes;
 				}, 100);
 			})
 		})
+	}
+
+	var storedUserId = StoreSvc.get('userId');
+	if (storedUserId) {
+		$scope.user = new User(storedUserId);
+		window.user = $scope.user;
+		afterUserReady();
+	} else {
+		$scope.user = false;
+	}
+
+	$scope.login = function (userId) {
+		$scope.user = new User(userId);
+		window.user = $scope.user;
+		afterUserReady();
 	}
 
 	// user.getLikes().then(function (res) {
