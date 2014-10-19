@@ -2,17 +2,26 @@
 	<div class="row">
 		<div class="col c1 controls">
 			<div class="row">
-				<a class="bttn" ng-click="play(track)" ng-show="!track.playing">
-					<i class="fa fa-1x fa-play"></i>
-				</a>
-				<a class="bttn" ng-click="pause(track.sound)" ng-show="track.playing">
-					<i class="fa fa-1x fa-pause"></i>
-				</a>
+				<div class="col c4 pull-left">
+					<a class="bttn" ng-click="play(track)" ng-show="!track.playing">
+						<i class="fa fa-1x fa-play"></i>
+					</a>
+					<a class="bttn" ng-click="pause(track.sound)" ng-show="track.playing">
+						<i class="fa fa-1x fa-pause"></i>
+					</a>
+				</div>
 			</div>
 			<div class="row">
-				<a class="bttn" ng-if="track.downloadable" ng-click="download(track)" target="_blank">
-					<i class="fa fa-1x fa-arrow-down"></i>
-				</a>
+				<div class="col c4">
+					<a class="bttn" ng-if="track.downloadable" ng-click="download(track)" target="_blank">
+						<i class="fa fa-1x fa-arrow-down"></i>
+					</a>
+				</div>
+				<div class="col c4">
+					<a class="bttn" ng-if="track.purchase_url" target="_blank" href="{{track.purchase_url}}">
+						<i class="fa fa-1x fa-shopping-cart"></i>
+					</a>
+				</div>
 			</div>
 		</div>
 
