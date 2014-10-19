@@ -1,18 +1,54 @@
 @import 'variables';
 
 #header {
+	margin-bottom: 0px;
+
+	#finger {
+		display: inline-block;
+		cursor: pointer;
+	}
+
 	.view-description {
 		font-size: .4em;
 		vertical-align: middle;
 	}
 }
 
+.content-container {
+	position: relative;
+	#finger-menu {
+		width: 30%;
+		margin: 0;
+		padding: 0;
+		background-color: #fff;
+		border: 1px solid $lightestGrey;
+		position: absolute;
+		padding: 5px 10px;
+		z-index: 100;
+
+		li {
+			&:last-child { border-bottom: none; }
+			border-bottom: 1px solid $lightestGrey;
+			list-style-type: none; 
+			cursor: pointer;
+			padding: 5px;
+		}
+	}
+}
+
 #notify {
 	margin: 0;
 	.loading {
+		&.invisible { color: transparent; }
 		margin: 0;
 		font-size: .7em;
 		text-align: center;
 		color: $lightGrey;
 	}
+}
+
+.blur-me {
+	pointer-events: none;
+	cursor: default;
+	filter: blur(3px);
 }
