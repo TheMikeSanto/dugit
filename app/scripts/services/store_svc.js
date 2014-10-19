@@ -7,13 +7,15 @@ function StoreSvc ($q) {
 			localStorage[key] = JSON.stringify(value);
 		},
 		get: function (key) {
-			var key = prefix + key,
-				item = localStorage[key];
+			var key = prefix + key;
+			var item = localStorage[key];
 
-			try {
-				var result = JSON.parse(item);
-			} catch (err) {
-				var result = item;
+			if (item.match(/^\d+$/)) {
+				item = Number(item);
+			} else {
+				try {
+					item = JSON.parse(item);
+				} catch (err) {}
 			}
 
 			return item;
