@@ -16,7 +16,10 @@ angular
     'ngTouch',
     'ui.router'
   ])
-
+  .run(function ($rootScope) {
+    $rootScope.loads = [];
+    $rootScope.errors = [];
+  })
   .config(function ($stateProvider, $urlRouterProvider) {
   	$urlRouterProvider.otherwise('/home');
 

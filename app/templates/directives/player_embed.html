@@ -10,33 +10,41 @@
 				</a>
 			</div>
 			<div class="row">
-				<a ng-if="track.downloadable" ng-click="download(track)" target="_blank">
+				<a class="bttn" ng-if="track.downloadable" ng-click="download(track)" target="_blank">
 					<i class="fa fa-1x fa-arrow-down"></i>
 				</a>
 			</div>
 		</div>
 
-		<div class="col c11">
+		<div class="col c9">
 			<p class="people">
 				<span class="artist">
 					<a href="{{track.user.permalink_url}}" target="_blank">
 						{{track.user.username}}
 					</a>
 				</span>
-				<span class="liked-by pull-right">
-					<i class="fa fa-heart"></i>
-					&#32;
-					<a href="{{track.liked_by.permalink_url}}" target="_blank">
-						{{track.liked_by.username}}
-					</a>
-				</span>
 			</p>
 			<p class="title">
-				<a href="{{track.permalink_url}}">
+				<a href="{{track.permalink_url}}" target="_blank">
 					{{track.title}}
 				</a>
 			</p>
+			<p class="description">
+				<strong>{{track.genre}}</strong>&#32;<span ng-show="track.tag_list.length">|</span>&#32;{{track.tag_list}}
+			</p>
 		</div>
 
+		<div class="col c2 text-right">
+			<div class="row liked-by">
+				<i class="fa fa-heart"></i>
+				&#32;
+				<a href="{{track.liked_by.permalink_url}}" target="_blank">
+					{{track.liked_by.username}}
+				</a>
+			</div>
+			<div class="row timestamp">
+				{{friendlyTimeStamp(track.created_at)}}
+			</div>
+		</div>
 	</div>
 </div>
