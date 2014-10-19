@@ -1,35 +1,44 @@
-<div id="home">
-	<div class="row">
-		<div class="col c8 offset1">
-			<h2>
-				<i class="ico">☞</i> Dug
-			</h2>
-			<h5 ng-show="user.fetched">
-				Recent favorites from favorite artists of {{user.data.username}}
-			</h5>
-		</div>
-		<div class="col c3 text-right" ng-show="loads.length > 0">
-			<p>
-				<i class="fa fa-cog fa-spin"></i> loading
-			</p>
-		</div>
-	</div>
-
-	<div class="row" ng-show="!user">
-		<div class="col c6 offset3">
-			Enter your SoundCloud username
-			<input class="smooth" type="text" ng-model="user_id">
-			<button class="btn btn-sm smooth" ng-click="login(user_id)">Ok</button>
-		</div>
-	</div>
-
-	<div id="likes" class="row" ng-show="likes.length > 0">
-		<div class="col c8 offset2">
-			<div class="likes-list">
-				<div ng-repeat="track in likes">
-					<div player-embed></div>
-				</div>
+<div id="home" class="row">
+	<div class="col c8 offset2">
+		<div id="header" class="row">
+			<div class="col c12">
+				<h2>
+					<i class="ico">☞</i>
+					&#32;
+					<span ng-if="!user.fetched">Dug</span>
+					<span ng-if="user.fetched">
+						Dug:
+						&#32;
+						<span class="view-description">
+							Tracks favorited by artists favorited by {{user.data.username}}
+						</spam>
+					</span>
+				</h2>
 			</div>
 		</div>
+
+		<div id="notify" class="row">
+			<div class="row loading" ng-show="loads.length > 0">
+				<i class="fa fa-cog fa-spin"></i> loading
+			</div>
+		</div>
+
+		<div class="row" ng-show="!user">
+			<div class="col c12">
+				Enter your SoundCloud username
+				<input class="smooth" type="text" ng-model="user_id">
+				<button class="btn btn-sm smooth" ng-click="login(user_id)">Ok</button>
+			</div>
+		</div>
+
+		<div id="likes" class="row" ng-show="likes.length > 0">
+			<div class="col c12">
+				<div class="tracks-list">
+					<div ng-repeat="track in likes">
+						<div player-embed></div>
+					</div>
+				</div>
+			</div>
+		</div>	
 	</div>
 </div>

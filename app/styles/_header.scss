@@ -1,0 +1,18 @@
+@import 'variables';
+
+#header {
+	.view-description {
+		font-size: .4em;
+		vertical-align: middle;
+	}
+}
+
+#notify {
+	margin: 0;
+	.loading {
+		margin: 0;
+		font-size: .7em;
+		text-align: center;
+		color: $lightGrey;
+	}
+}

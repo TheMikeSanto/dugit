@@ -1,0 +1,41 @@
+.tracks-list {
+	background-color: #fff;
+	max-height: 600px;
+	overflow: auto;
+}
+
+.track {
+	border-bottom: 1px solid #CCCCCC;
+	vertical-align: middle;
+
+	.controls {
+		text-align: center;
+	}
+
+	.people {
+		.artist {
+			font-size: 1em;
+			font-style: italic;
+			color: #CCCCCC;
+		}
+	}
+
+	.description {
+		font-size: .5em;
+	}
+	
+	.liked-by {
+		vertical-align: middle;
+		font-size: .6em;
+		font-weight: bold;
+		color: #E60000;
+	}
+
+	.timestamp {
+		font-size: .7em;
+		color: #8F8F8F;
+	}
+	.track-info {
+		font-size: 1.2em;
+	}
+}

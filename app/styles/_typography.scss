@@ -1,3 +1,5 @@
+@import 'variables';
+
 h1, h2, h3, h4, h5, h6, p {
 	margin: 0;
 }
@@ -8,7 +10,7 @@ a, a:visited, a:hover {
 }
 
 a:hover {
-	color: #4688F1;
+	color: $blue;
 	// text-shadow: 0px 1px 0px rgba(150, 150, 150, 0.4);
 }
 
@@ -17,7 +19,7 @@ a:hover {
 		color: inherit;
 	}
 	&:active {
-		color: #f1f1f1;
+		color: $lightestGrey;
 	}
 	cursor: pointer;
 	display: inline-block;
