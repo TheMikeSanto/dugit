@@ -1,6 +1,6 @@
 'use strict';
 
-function MainCtrl ($rootScope, $scope, $timeout, ApiSvc, User, StoreSvc) {
+function MainCtrl ($rootScope, $scope, $timeout, $state, ApiSvc, User, StoreSvc) {
 	$scope.likes = [];
 
 	var afterUserReady = function() {
@@ -8,7 +8,9 @@ function MainCtrl ($rootScope, $scope, $timeout, ApiSvc, User, StoreSvc) {
 			$scope.user.fetchFollowingLikes();
 			$scope.$watch('user.followings.likes.length', function (newVal) {
 				$timeout(function() {
-					$scope.likes = $scope.user.followings.likes;
+					if ($scope.user) {
+						$scope.likes = $scope.user.followings.likes;
+					}
 				}, 100);
 			})
 		})
@@ -20,6 +22,7 @@ function MainCtrl ($rootScope, $scope, $timeout, ApiSvc, User, StoreSvc) {
 		window.user = $scope.user;
 		afterUserReady();
 	} else {
+		$state.go('main.user');
 		$scope.user = false;
 	}
 
@@ -27,6 +30,12 @@ function MainCtrl ($rootScope, $scope, $timeout, ApiSvc, User, StoreSvc) {
 		$scope.user = new User(userId);
 		window.user = $scope.user;
 		afterUserReady();
+		$state.go('main.home');
+	}
+
+	$scope.switchUser = function() {
+		$scope.user = $scope.user.delete();
+		$state.go('main.user');
 	}
 
 	// user.getLikes().then(function (res) {
@@ -47,4 +56,4 @@ function MainCtrl ($rootScope, $scope, $timeout, ApiSvc, User, StoreSvc) {
 	}
 }
 
-angular.module('scFriendsApp').controller('MainCtrl', ['$rootScope', '$scope', '$timeout', 'ApiSvc', 'User', 'StoreSvc', MainCtrl]);
+angular.module('scFriendsApp').controller('MainCtrl', ['$rootScope', '$scope', '$timeout', '$state', 'ApiSvc', 'User', 'StoreSvc', MainCtrl]);

@@ -5,7 +5,7 @@ function Dropdown() {
 			var menu = document.getElementById("finger-menu");
 			var button = element.find('i')[0];
 			var body = angular.element(document.querySelector('body'));
-			var content = document.getElementById('likes');
+			var content = document.getElementById('blurable');
 
 			var toggleVisible = function () {
 				scope.menu.visible = !scope.menu.visible;

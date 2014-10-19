@@ -53,6 +53,13 @@ function UserSvc ($rootScope, $q, $filter, ApiSvc, StoreSvc) {
 		return self.readyPromise.promise;
 	}
 
+	user.prototype.delete = function() {
+		var self = this;
+		StoreSvc.delete('userId');
+		ApiSvc.clearLoads();
+		return null;
+	}
+
 	user.prototype.fetch = function(force) {
 		var self = this;
 		var deferred = $q.defer();

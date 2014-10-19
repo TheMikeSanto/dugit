@@ -28,6 +28,10 @@ angular
   			templateUrl: 'templates/main.html',
   			controller: 'MainCtrl'
   		})
+      .state('main.user', {
+        url: '/user',
+        templateUrl: 'views/user.html'
+      })
   		.state('main.home', {
   			url: '/home',
   			templateUrl: 'views/home.html'

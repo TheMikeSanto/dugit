@@ -19,6 +19,10 @@ function StoreSvc ($q) {
 			}
 
 			return item;
+		},
+		delete: function (key) {
+			var key = prefix + key;
+			localStorage.removeItem(key);
 		}
 	}
 }

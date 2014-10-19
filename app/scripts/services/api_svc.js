@@ -58,6 +58,9 @@ function ApiSvc ($q, $rootScope) {
 			var url = "https://soundcloud.com/" + path;
 			return this.get('resolve', {url: url});
 		},
+		clearLoads: function () {
+			$rootScope.loads = [];
+		},
 		loadToggle: function (name) {
 			if (typeof $rootScope.loads === 'undefined') {
 				$rootScope.loads = [];

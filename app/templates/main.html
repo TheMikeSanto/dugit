@@ -1,3 +1,43 @@
 <div class="container">
-	<div ui-view=""></div>
+	<div id="home" class="row">
+		<div class="col c8 offset2">
+			<div id="header" class="row">
+				<div class="col c12">
+					<h2>
+						<div id="finger" dropdown>
+							{{scope.menu}}
+							<i class="ico">☞</i>
+						</div>
+						&#32;
+						<span ng-if="!user.fetched">Dugit</span>
+						<span ng-if="user.fetched">
+							Dugit:
+							&#32;
+							<span class="view-description">
+								Tracks favorited by artists favorited by {{user.data.username}}
+							</spam>
+						</span>
+					</h2>
+				</div>
+			</div>
+
+			<div class="content-container">
+				<ul id="finger-menu">
+					<li>
+						<a ng-click="switchUser()">Switch user</a>
+					</li>
+	      </ul>
+
+				<div id="notify" class="row">
+					<div class="row loading" ng-class="{invisible: (loads.length === 0)}">
+						<i class="fa fa-cog fa-spin"></i> loading
+					</div>
+				</div>
+
+				<div id="blurable">
+					<div ui-view="" id="blurable"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
