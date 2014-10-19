@@ -10,7 +10,7 @@ function StoreSvc ($q) {
 			var key = prefix + key;
 			var item = localStorage[key];
 
-			if (item.match(/^\d+$/)) {
+			if (item && item.match(/^\d+$/)) {
 				item = Number(item);
 			} else {
 				try {
