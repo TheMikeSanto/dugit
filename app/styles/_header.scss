@@ -40,12 +40,20 @@
 
 #notify {
 	margin: 0;
+	font-size: .7em;
+	text-align: center;
+
+	.row {
+		margin: 0;
+	}
+
 	.loading {
 		&.invisible { color: transparent; }
-		margin: 0;
-		font-size: .7em;
-		text-align: center;
 		color: $lightGrey;
+	}
+
+	.errors {
+		color: #E60000;
 	}
 }
 

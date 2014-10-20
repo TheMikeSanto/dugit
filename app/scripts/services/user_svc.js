@@ -48,6 +48,9 @@ function UserSvc ($rootScope, $q, $filter, ApiSvc, StoreSvc) {
 				ApiSvc.loadToggle(loadName);
 				self.readyPromise.reject(error);
 			})
+		}, function (error) {
+			ApiSvc.loadToggle(loadName);
+			self.readyPromise.reject(error);
 		})
 
 		return self.readyPromise.promise;
@@ -86,11 +89,8 @@ function UserSvc ($rootScope, $q, $filter, ApiSvc, StoreSvc) {
 					self.id = self.data.id;
 					deferred.resolve()
 				},function (error) {
-					var message = "Could not fetch user."
-					if (error) {
-						message = error;
-					}
-					deferred.reject(message)
+					var message = self.id.toString() + " could not be found.";
+					deferred.reject(message);
 				})
 			}
 		}

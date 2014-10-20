@@ -32,6 +32,11 @@
 					<div class="row loading" ng-class="{invisible: (loads.length === 0)}">
 						<i class="fa fa-cog fa-spin"></i> loading
 					</div>
+					<div class="row errors" ng-show="errors.length">
+						<span ng-repeat="error in errors">
+							{{error}}
+						</span>
+					</div>
 				</div>
 
 				<div id="blurable">

@@ -13,6 +13,9 @@ function MainCtrl ($rootScope, $scope, $timeout, $state, ApiSvc, User, StoreSvc)
 					}
 				}, 100);
 			})
+		}, function (error) {
+			$rootScope.errors.push(error);
+			$state.go('main.user');
 		})
 	}
 
@@ -27,6 +30,7 @@ function MainCtrl ($rootScope, $scope, $timeout, $state, ApiSvc, User, StoreSvc)
 	}
 
 	$scope.login = function (userId) {
+		$rootScope.errors = [];
 		$scope.user = new User(userId);
 		window.user = $scope.user;
 		afterUserReady();
