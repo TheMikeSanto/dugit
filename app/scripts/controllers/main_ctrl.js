@@ -4,6 +4,7 @@ function MainCtrl ($rootScope, $scope, $timeout, $state, ApiSvc, User, StoreSvc)
 	$scope.likes = [];
 
 	var afterUserReady = function() {
+		console.log(1);
 		$scope.user.ready().then(function() {
 			$scope.user.fetchFollowingLikes();
 			$scope.$watch('user.followings.likes.length', function (newVal) {

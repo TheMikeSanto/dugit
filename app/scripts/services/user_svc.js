@@ -83,11 +83,22 @@ function UserSvc ($rootScope, $q, $filter, ApiSvc, StoreSvc) {
 				});
 			} else {
 				var username = self.id.toLowerCase().replace(" ", "");
-				ApiSvc.resolve(username).then(function (res) {
-					self.data = {};
-					angular.copy(res, self.data);
-					self.id = self.data.id;
-					deferred.resolve()
+				ApiSvc.get('users', {q: self.id}).then(function (res) {
+					var found = false;
+					angular.forEach(res, function (result) {
+						if (result.username === self.id) {
+							self.data = {};
+							angular.copy(result, self.data);
+							self.id = self.data.id;
+							found = true;
+							deferred.resolve()							
+						}
+					})
+
+					if (!found) {
+						var message = self.id.toString() + " could not be found.";
+						deferred.reject(message);
+					}
 				},function (error) {
 					var message = self.id.toString() + " could not be found.";
 					deferred.reject(message);
