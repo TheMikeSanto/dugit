@@ -36,6 +36,7 @@ function ApiSvc ($q, $rootScope) {
 				offset = 0;
 			}
 
+			params.limit = 200;
 			params.offset = offset;
 
 			self.get(resource, params).then(function (res) {
