@@ -4,7 +4,14 @@ function playerEmbed(ApiSvc) {
 		templateUrl: 'templates/directives/player_embed.html',
 		link: function (scope, element, attrs) {
 			scope.play = function (track) {
-				ApiSvc.stream(track.id).then(function (sound) {
+				var progressBar = element[0].querySelector('.bar');
+				ApiSvc.stream(track.id, {
+					whileplaying: function() {
+						var progress = ((this.position/this.duration) * 100) + "%";
+						progressBar.style.width = progress;
+						console.log((this.position/this.duration) * 100);
+					}
+				}).then(function (sound) {
 					scope.track.playing = true;
 					scope.track.sound = sound;
 					sound.play();

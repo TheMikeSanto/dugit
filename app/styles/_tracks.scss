@@ -1,5 +1,7 @@
+@import 'variables';
+
 .tracks-list {
-	background-color: #fff;
+	background-color: $white;
 	max-height: 600px;
 	overflow: auto;
 }
@@ -28,14 +30,23 @@
 		vertical-align: middle;
 		font-size: .6em;
 		font-weight: bold;
-		color: #E60000;
+		color: $red;
 	}
 
 	.timestamp {
 		font-size: .7em;
-		color: #8F8F8F;
+		color: $lightGrey;
 	}
 	.track-info {
 		font-size: 1.2em;
+	}
+
+	.progress {
+		height: 2px;
+		.bar {
+			height: 100%;
+			background-color: $red;
+			width: 0%;
+		}
 	}
 }

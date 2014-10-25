@@ -75,10 +75,10 @@ function ApiSvc ($q, $rootScope) {
 
 			return loadIndex;
 		},
-		stream: function (trackId) {
+		stream: function (trackId, options) {
 			var deferred = $q.defer();
 
-			SC.stream('/tracks/' + trackId, function (res) {
+			SC.stream('/tracks/' + trackId, options, function (res) {
 				if (res.errors) {
 					deferred.reject(res.errors);
 				} else {
