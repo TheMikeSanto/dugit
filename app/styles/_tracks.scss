@@ -43,6 +43,10 @@
 
 	.progress {
 		height: 2px;
+
+		&.active {
+			cursor: pointer;
+		}
 		.bar {
 			height: 100%;
 			background-color: $red;

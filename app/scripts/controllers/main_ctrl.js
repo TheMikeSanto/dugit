@@ -55,7 +55,7 @@ function MainCtrl ($rootScope, $scope, $timeout, $state, ApiSvc, User, StoreSvc)
 			if (month < 10) {
 				month = "0" + month;
 			}
-
+			
 		return [month, day, year].join("/");
 	}
 }
