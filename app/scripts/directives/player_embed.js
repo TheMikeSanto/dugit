@@ -26,6 +26,14 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 						progressContainer.className = progressContainer.className.replace(/\bactive\b/, '');
 						scope.track.playing = false;
 					},
+					onfinish: function() {
+						progressContainer.className = progressContainer.className.replace(/\bactive\b/, '');
+						progressBar.style.width = "0%";
+						scope.$apply(function() {
+							scope.currentTime = "";
+							scope.track.playing = false;
+						})
+					},
 					onresume: function() {
 						scope.track.playing = true;
 					},
@@ -35,6 +43,18 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 					},
 					whileplaying: function() {
 						var progress = ((this.position/this.duration) * 100) + "%";
+						var seconds = (this.position/1000).toFixed(0);
+						var minutes = (seconds/60).toFixed(0);
+						if (minutes < 10) {
+							minutes = "0" + minutes;
+						}
+						var remaining = seconds % 60;
+						if (remaining < 10) {
+							remaining = "0" + remaining;
+						}
+						scope.$apply(function() {
+							scope.currentTime = minutes + ":" + remaining;
+						});
 						progressBar.style.width = progress;
 					}
 				}).then(function (sound) {
@@ -47,9 +67,11 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 			scope.play = function () {
 				if (angular.isUndefined(scope.track.sound)) {
 					setup(scope.track).then(function() {
+						scope.timestamp = "00:00";
 						scope.track.sound.play();
 					})
 				} else {
+					scope.timestamp = "00:00";
 					scope.track.sound.play();				
 				}
 			}

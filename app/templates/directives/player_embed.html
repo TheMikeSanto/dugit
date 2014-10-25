@@ -2,26 +2,15 @@
 	<div class="row">
 		<div class="col c1 controls">
 			<div class="row">
-				<div class="col c4 pull-left">
-					<a class="bttn" ng-click="play()" ng-show="!track.playing">
-						<i class="fa fa-1x fa-play"></i>
-					</a>
-					<a class="bttn" ng-click="pause()" ng-show="track.playing">
-						<i class="fa fa-1x fa-pause"></i>
-					</a>
-				</div>
+				<a class="bttn" ng-click="play()" ng-show="!track.playing">
+					<i class="fa fa-2x fa-play"></i>
+				</a>
+				<a class="bttn" ng-click="pause()" ng-show="track.playing">
+					<i class="fa fa-2x fa-pause"></i>
+				</a>
 			</div>
-			<div class="row">
-				<div class="col c4">
-					<a class="bttn" ng-if="track.downloadable" ng-click="download(track)" target="_blank">
-						<i class="fa fa-1x fa-arrow-down"></i>
-					</a>
-				</div>
-				<div class="col c4">
-					<a class="bttn" ng-if="track.purchase_url" target="_blank" href="{{track.purchase_url}}">
-						<i class="fa fa-1x fa-shopping-cart"></i>
-					</a>
-				</div>
+			<div class="row currentTime">
+				<p>{{currentTime}}</p>
 			</div>
 		</div>
 
@@ -54,6 +43,14 @@
 			<div class="row timestamp">
 				{{friendlyTimeStamp(track.created_at)}}
 			</div>
+			<div class="row links">
+				<a class="bttn" ng-if="track.downloadable" ng-click="download(track)" target="_blank">
+					<i class="fa fa-1x fa-arrow-down"></i>
+				</a>
+				<a class="bttn" ng-if="track.purchase_url" target="_blank" href="{{track.purchase_url}}">
+					<i class="fa fa-1x fa-shopping-cart"></i>
+				</a>
+			</div>			
 		</div>
 	</div>
 	<div class="progress">
