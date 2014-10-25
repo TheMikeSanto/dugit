@@ -5,6 +5,7 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 		link: function (scope, element, attrs) {
 			var progressContainer = element[0].querySelector('.progress');
 			var progressBar = element[0].querySelector('.bar');
+			scope.currentTime = "00:00";
 
 			angular.element(progressContainer).bind('click', function (e) {
 				var percent = Math.floor((e.offsetX / progressContainer.offsetWidth) * 100);
@@ -14,6 +15,14 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 				scope.track.sound.setPosition(newPosition);
 			})
 
+			$rootScope.$on('playStart', function (e, data) {
+				if (scope.track.id !== data.currentTrackId) {
+					if (angular.isDefined(scope.track.sound)) {
+						stopPlay();
+					}
+				}
+			})
+
 			var setup = function (track) {
 				var deferred = $q.defer();
 				var progressBar = element[0].querySelector('.bar');
@@ -21,10 +30,12 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 					onplay: function() {
 						progressContainer.className = progressContainer.className + " active";
 						scope.track.playing = true;
+						scope.track.paused = false;
 					},
 					onpause: function() {
 						progressContainer.className = progressContainer.className.replace(/\bactive\b/, '');
 						scope.track.playing = false;
+						scope.track.paused = true;
 					},
 					onfinish: function() {
 						progressContainer.className = progressContainer.className.replace(/\bactive\b/, '');
@@ -36,6 +47,7 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 					},
 					onresume: function() {
 						scope.track.playing = true;
+						scope.track.paused = false;
 					},
 					ondataerror: function() {
 						progressContainer.className = progressContainer.className.replace(/\bactive\b/, '');
@@ -52,9 +64,12 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 						if (remaining < 10) {
 							remaining = "0" + remaining;
 						}
-						scope.$apply(function() {
-							scope.currentTime = minutes + ":" + remaining;
-						});
+
+						if (this.duration > 0) {
+							scope.$apply(function() {
+								scope.currentTime = minutes + ":" + remaining;
+							});
+						}
 						progressBar.style.width = progress;
 					}
 				}).then(function (sound) {
@@ -64,20 +79,31 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 
 				return deferred.promise;
 			}
+
+			var startPlay = function() {
+				$rootScope.$emit('playStart', {currentTrackId: scope.track.id});
+				scope.track.sound.play();
+			}
+
+			var stopPlay = function() {
+				scope.track.sound.stop();
+				progressContainer.className = progressContainer.className.replace(/\bactive\b/, '');
+				progressBar.style.width = "0%";
+				scope.currentTime = "";
+				scope.track.playing = false;
+			}
+
 			scope.play = function () {
 				if (angular.isUndefined(scope.track.sound)) {
 					setup(scope.track).then(function() {
-						scope.timestamp = "00:00";
-						scope.track.sound.play();
+						startPlay();
 					})
 				} else {
-					scope.timestamp = "00:00";
-					scope.track.sound.play();				
+					startPlay();
 				}
 			}
 			scope.pause = function () {
 				scope.track.sound.pause();
-				scope.track.playing = false;
 			}
 			scope.download = function (track) {
 				alert(track.download_url);

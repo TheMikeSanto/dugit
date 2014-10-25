@@ -10,7 +10,10 @@
 				</a>
 			</div>
 			<div class="row currentTime">
-				<p>{{currentTime}}</p>
+				<p ng-class="{invisible: (!track.playing && !track.paused)}">
+					<i class="fa fa-clock-o"></i>
+					{{currentTime}}
+				</p>
 			</div>
 		</div>
 
