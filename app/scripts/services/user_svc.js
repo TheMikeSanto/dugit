@@ -164,7 +164,7 @@ function UserSvc ($rootScope, $q, $filter, ApiSvc, StoreSvc) {
 				var orderBy = ['created_at', 'favoritings_count'];
 				self.followings.likes = self.followings.likes.concat(likes);
 				self.followings.likes = $filter('orderBy')(self.followings.likes, orderBy, true);
-			}, function (err) {
+			}, function (error) {
 				console.log(error);
 			})
 			promises.push(promise);
@@ -173,7 +173,8 @@ function UserSvc ($rootScope, $q, $filter, ApiSvc, StoreSvc) {
 		$q.all(promises).then(function() {
 			ApiSvc.loadToggle(loadName);
 			deferred.resolve(self.likes);
-		}, function(err) {
+		}, function (err) {
+			ApiSvc.loadToggle(loadName);
 			deferred.reject(err);
 		});
 
@@ -189,6 +190,12 @@ function UserSvc ($rootScope, $q, $filter, ApiSvc, StoreSvc) {
 				result.liked_by = self.data;
 			})
 			deferred.resolve(res);
+		}, function (error) {
+			if (error === "Response empty") {
+				deferred.resolve([]);
+			} else {
+				deferred.reject(error);
+			}
 		})
 
 		return deferred.promise;
