@@ -11,6 +11,11 @@
 }
 
 .player-embed {
+	border-bottom: 1px solid #CCCCCC;
+	&:last-child { 
+		border-bottom: none; 
+	}
+	
 	&.playing {
 		// width: 100%;
 		// position: absolute;
@@ -19,7 +24,6 @@
 
 	.track {
 		background-color: $white;
-		border-bottom: 1px solid #CCCCCC;
 		vertical-align: middle;
 
 		.controls {
