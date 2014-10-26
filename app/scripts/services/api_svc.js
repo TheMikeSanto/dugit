@@ -1,9 +1,10 @@
 function ApiSvc ($q, $rootScope) {
-	SC.initialize({
-    client_id: "409b9d0dda12972b224f6a95105eda64"
-  });
+	var client_id = "409b9d0dda12972b224f6a95105eda64";
+  var emptyResponseMsg = "Response empty";
 
-  var emptyResponseMsg = "Response empty"
+	SC.initialize({
+    client_id: client_id
+  });
 
 	return {
 		get: function (resource, params) {
@@ -74,6 +75,10 @@ function ApiSvc ($q, $rootScope) {
 			}
 
 			return loadIndex;
+		},
+		download: function (trackId) {
+			var url = "http://api.soundcloud.com/tracks/" + trackId + "/download?client_id=" + client_id;
+			window.open(url);
 		},
 		stream: function (trackId, options) {
 			var deferred = $q.defer();

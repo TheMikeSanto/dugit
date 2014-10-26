@@ -30,7 +30,6 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 
 			$rootScope.$on('playNext', function (e, data) {
 				if (Number(scope.track.id) === Number(data.trackId)) {
-					console.log(scope.track);
 					setup().then(function() {
 						startPlay();
 					})
@@ -127,8 +126,8 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 			scope.pause = function () {
 				scope.track.sound.pause();
 			}
-			scope.download = function (track) {
-				alert(track.download_url);
+			scope.download = function () {
+				ApiSvc.download(scope.track.id);
 			}
 		}
 	}
