@@ -10,6 +10,7 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 			scope.currentTime = "00:00";
 
 			container.className = container.className + ' player-embed';
+			container.setAttribute('track-id', scope.track.id);
 
 			angular.element(progressContainer).bind('click', function (e) {
 				var percent = Math.floor((e.offsetX / progressContainer.offsetWidth) * 100);
@@ -25,12 +26,21 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 						stopPlay();
 					}
 				}
+			});
+
+			$rootScope.$on('playNext', function (e, data) {
+				if (Number(scope.track.id) === Number(data.trackId)) {
+					console.log(scope.track);
+					setup().then(function() {
+						startPlay();
+					})
+				}
 			})
 
-			var setup = function (track) {
+			var setup = function () {
 				var deferred = $q.defer();
 				var progressBar = element[0].querySelector('.bar');
-				ApiSvc.stream(track.id, {
+				ApiSvc.stream(scope.track.id, {
 					onplay: function() {
 						parent.className = parent.className + " playing";
 						container.className = container.className + " playing";
@@ -50,6 +60,9 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 							scope.currentTime = "";
 							scope.track.playing = false;
 						})
+
+						var nextTrackId = container.nextElementSibling.getAttribute('track-id');
+						$rootScope.$emit('playNext', {trackId: nextTrackId});
 					},
 					onresume: function() {
 						scope.track.playing = true;
