@@ -6,6 +6,9 @@
 	#finger {
 		display: inline-block;
 		cursor: pointer;
+		.ico {
+			transition: transform .2s;
+		}
 	}
 
 	.view-description {
@@ -27,7 +30,7 @@
 		position: absolute;
 		padding: 5px 10px;
 		z-index: 100;
-
+		
 		li {
 			&:last-child { border-bottom: none; }
 			border-bottom: 1px solid $lightestGrey;
