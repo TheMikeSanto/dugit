@@ -3,9 +3,13 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 		scope: true,
 		templateUrl: 'templates/directives/player_embed.html',
 		link: function (scope, element, attrs) {
-			var progressContainer = element[0].querySelector('.progress');
-			var progressBar = element[0].querySelector('.bar');
+			var container = element[0];
+			var parent = container.parentElement;
+			var progressContainer = container.querySelector('.progress');
+			var progressBar = container.querySelector('.bar');
 			scope.currentTime = "00:00";
+
+			container.className = container.className + ' player-embed';
 
 			angular.element(progressContainer).bind('click', function (e) {
 				var percent = Math.floor((e.offsetX / progressContainer.offsetWidth) * 100);
@@ -28,6 +32,8 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 				var progressBar = element[0].querySelector('.bar');
 				ApiSvc.stream(track.id, {
 					onplay: function() {
+						parent.className = parent.className + " playing";
+						container.className = container.className + " playing";
 						progressContainer.className = progressContainer.className + " active";
 						scope.track.playing = true;
 						scope.track.paused = false;
@@ -88,9 +94,12 @@ function playerEmbed($q, $rootScope, ApiSvc) {
 			var stopPlay = function() {
 				scope.track.sound.stop();
 				progressContainer.className = progressContainer.className.replace(/\bactive\b/, '');
+				parent.className = parent.className.replace(/\bplaying\b/, '');
+				container.className = container.className.replace(/\bplaying\b/, '');
 				progressBar.style.width = "0%";
 				scope.currentTime = "";
 				scope.track.playing = false;
+				scope.track.paused = false;
 			}
 
 			scope.play = function () {

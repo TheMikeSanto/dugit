@@ -4,57 +4,70 @@
 	background-color: $white;
 	max-height: 600px;
 	overflow: auto;
+
+	&.playing {
+		// padding-top: 45px;
+	}
 }
 
-.track {
-	border-bottom: 1px solid #CCCCCC;
-	vertical-align: middle;
-
-	.controls {
-		text-align: center;
-
-		.currentTime { 
-			font-size: .7em;
-		}
+.player-embed {
+	&.playing {
+		// width: 100%;
+		// position: absolute;
+		// top: 0px;
 	}
 
-	.people {
-		.artist {
-			font-size: 1em;
-			font-style: italic;
-			color: #CCCCCC;
-		}
-	}
-
-	.description {
-		font-size: .5em;
-	}
-	
-	.liked-by {
+	.track {
+		background-color: $white;
+		border-bottom: 1px solid #CCCCCC;
 		vertical-align: middle;
-		font-size: .6em;
-		font-weight: bold;
-		color: $red;
-	}
 
-	.timestamp {
-		font-size: .7em;
-		color: $lightGrey;
-	}
-	.track-info {
-		font-size: 1.2em;
-	}
+		.controls {
+			text-align: center;
 
-	.progress {
-		height: 2px;
-
-		&.active {
-			cursor: pointer;
+			.currentTime { 
+				font-size: .7em;
+			}
 		}
-		.bar {
-			height: 100%;
-			background-color: $red;
-			width: 0%;
+
+		.people {
+			.artist {
+				font-size: 1em;
+				font-style: italic;
+				color: #CCCCCC;
+			}
+		}
+
+		.description {
+			font-size: .5em;
+		}
+		
+		.liked-by {
+			vertical-align: middle;
+			font-size: .6em;
+			font-weight: bold;
+			color: $red;
+		}
+
+		.timestamp {
+			font-size: .7em;
+			color: $lightGrey;
+		}
+		.track-info {
+			font-size: 1.2em;
+		}
+
+		.progress {
+			height: 2px;
+
+			&.active {
+				cursor: pointer;
+			}
+			.bar {
+				height: 100%;
+				background-color: $red;
+				width: 0%;
+			}
 		}
 	}
 }
