@@ -1,0 +1,4 @@
+#!/bin/bash
+
+grunt build; 
+rsync -avr /Users/mike/projects/dugit/dist/ root@guildmedia.co:/var/www/guildmedia.co/html/dugit;
